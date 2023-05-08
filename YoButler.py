@@ -18,7 +18,37 @@ import textwrap
 import subprocess
 import ast
 import traceback
-from transformers import pipeline
+from safetensors.torch import load_file
+import torch
+from transformers import AutoModelForCausalLM, AutoConfig
+
+model_path = "mpt-7b-storywriter-4bit-128g/model.safetensors"
+config = AutoConfig.from_pretrained("mpt-7b-storywriter-4bit-128g", trust_remote_code=True)
+
+# Load the safetensors file
+loaded_tensors = load_file(model_path)
+
+# Convert the loaded tensors into a state dictionary that PyTorch can understand
+state_dict = {key: torch.tensor(value) for key, value in loaded_tensors.items()}
+
+# Load the model and state dictionary
+model = AutoModelForCausalLM.from_config(config, trust_remote_code=True)
+model.load_state_dict(state_dict)
+
+
+
+# Define a function to generate embeddings for a given text
+def generate_embeddings(text):
+    # Tokenize the text and convert it to tensor
+    input_ids = torch.tensor(tokenizer.encode(text)).unsqueeze(0)
+
+    # Pass the input through the model to generate the embeddings
+    with torch.no_grad():
+        outputs = model(input_ids)
+        embeddings = outputs[0][:, 0, :]
+
+    # Convert the embeddings to a numpy array and return it
+    return embeddings.numpy()
 
 
 # Create text loader objects for each file
@@ -38,8 +68,7 @@ docs = docs1 + docs2 + docs3
 index = VectorstoreIndexCreator().from_documents(docs)
 
 
-# Define question answering chain
-llm = "mpt-7b-storywriter-4bit-128g"
+
 qa_chain = pipeline("question-answering", model="mosaicml/mpt-7b-storywriter", tokenizer="EleutherAI/gpt-neox-20b", trust_remote_code=True)
 
 
