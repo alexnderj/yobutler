@@ -1,0 +1,3 @@
+in the mean time you can download it from here, I'm working on my cousins computer and I don't want to get too much git involved since I'm an amature and they're an amature and it's not my computer so if I make files that are unneccessary and clutter their harddrive I'll feel bad. 
+
+https://huggingface.co/OccamRazor/mpt-7b-storywriter-4bit-128g/tree/main

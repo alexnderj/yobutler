@@ -1,0 +1,25 @@
+Building a Leon Module
+
+A module for Leon can be a powerful way to extend its capabilities. Here's a step-by-step guide to help you get started:
+
+1. Create a new directory in the `packages` directory with a lowercase English name that describes your package.
+
+2. Inside your package directory, create a `config` directory with two files: `config.json` and `config.sample.json`. The former will contain your module's configuration, and the latter will be a sample configuration for users to use as a reference.
+
+3. Create a `data` directory to store all the data files for your package. In this directory, create a subdirectory named `expressions` to store your translations files. These files will contain your custom entities, which are chunks of text that Leon can extract from user input. You can also create a `db` directory here to store any persistent data your module needs to keep track of.
+
+4. Create a `test` directory to store your module's unit tests. These tests will ensure your module functions correctly and catches any errors before deployment.
+
+5. Create a `README.md` file to describe your module and how to use it.
+
+6. Create an `__init__.py` file to mark your package directory as a Python module.
+
+7. Create a `version.txt` file to keep track of your module's version number.
+
+8. Create a Python module file for your module in the package directory. You can use any naming convention you like, but make sure it ends in `.py`.
+
+9. Define any custom entities you need in the translations files in the `expressions` directory. You can use trim entities to extract specific parts of user input or regex entities to match patterns.
+
+10. Use the `utils.db()` function to manage your module's database, which is powered by TinyDB. You can use this database to store persistent data, like user preferences or history.
+
+By following these steps, you can create a robust module for Leon that extends its capabilities and allows you to interact with users more effectively. Good luck!

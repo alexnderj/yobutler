@@ -1,0 +1,3 @@
+The program prompts the user for a programming task using a command line interface (CLI), and then waits for user input to add on to the task. Once the user inputs the keyword "!GOBUTLER!", the program executes a flowchart to complete the task, but the user still needs to monitor the program's progress and handle any errors that arise.
+
+The program also does not currently have the ability to automatically generate compiling code that matches the requested program. It is currently designed to execute a fixed flowchart of tasks, which may or may not result in a compiling code that matches the requested program.
